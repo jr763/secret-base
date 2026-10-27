@@ -27,6 +27,17 @@
   document.addEventListener("DOMContentLoaded",function(){var st=document.querySelector('[data-screen="settings"]');if(!st||sa)return;var b=document.createElement("button");b.className="btn ghost";b.type="button";b.textContent=canFS?"全螢幕模式":"全螢幕玩法（加到主畫面）";b.onclick=window.fsToggle;st.appendChild(b)});
 })();
 </script>
+<script>
+(function(){var V="1793087849",shown=false;
+  function bar(){if(shown)return;shown=true;var b=document.createElement("div");b.id="updBar";b.setAttribute("role","status");
+    b.style.cssText="position:fixed;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom));z-index:99999;width:min(92vw,380px);display:flex;align-items:center;gap:10px;padding:10px 12px;background:#241e3e;color:#f4efff;border:3px solid #0a0a18;box-shadow:0 0 0 2px #ffd95a,6px 6px 0 #0a0a1866;font:14px/1.4 'Noto Sans TC',system-ui,sans-serif";
+    var t=document.createElement("span");t.style.flex="1";t.textContent="有新版本了，按更新刷新";var k=document.createElement("button");k.type="button";k.textContent="更新";k.style.cssText="font:inherit;font-weight:700;background:#ffd95a;color:#241a06;border:2px solid #0a0a18;padding:6px 14px;cursor:pointer;white-space:nowrap";
+    k.onclick=function(){var u=location.pathname+"?v="+Date.now()+location.hash;location.replace(u)};var x=document.createElement("button");x.type="button";x.textContent="✕";x.setAttribute("aria-label","稍後");x.style.cssText="font:inherit;background:none;border:0;color:#b8b0d8;cursor:pointer;padding:4px";x.onclick=function(){b.remove();shown=false;setTimeout(check,600000)};
+    b.append(t,k,x);document.body.appendChild(b)}
+  function check(){if(shown||location.protocol==="file:")return;fetch("version.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).then(function(j){if(j&&j.v&&String(j.v)!==V)bar()}).catch(function(){})}
+  setTimeout(check,8000);setInterval(check,300000);document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")check()});
+})();
+</script>
 <title>秘密基地</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
